@@ -4,6 +4,7 @@
 # Implementação em tkinter do jogo term.ooo em pt-br
 
 
+from copy import deepcopy
 from tkinter import *
 from random import randint
 
@@ -46,3 +47,30 @@ def sortWordlist(files: list) -> None:
 	print(palavra)
 	return(palavra)
 
+def freqWordlist(files) -> list:
+	"Retorna a frequência de letras em casa posição."
+	lista = listWordlist(files)
+	freqList = []
+	for posicao in range(tamanho):
+		freq = dict()
+		for letra in "abcdefghijklmnopqrstuvwxyz":
+			freq[letra] = 0
+		for palavra in lista:
+			for letra in "abcdefghijklmnopqrstuvwxyz":
+				if palavra[posicao] == letra:
+					freq[letra] += 1
+					if letra == "y": print(palavra)
+		freqList.append(deepcopy(freq))
+	return freqList
+
+class gui:
+	def __init__(self) -> None:
+		self.interface()
+
+	def interface(self) -> None:
+		"Interface gráfica."
+		self.jogo = Tk()
+		
+		self.jogo.frame = Frame(self.jogo)
+		
+		self.jogo.mainloop()
